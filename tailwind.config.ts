@@ -21,6 +21,8 @@ const config: Config = {
         cream: "#F1ECE9",
       },
       black: "#000000",
+      inStock: "#38761d",
+      outOfStock: "#990000"
     },
     extend: {
       backgroundImage: {

@@ -8,7 +8,7 @@ interface Params {
 const Product = ({ params } : { params: Params }) => {
 
     return ( 
-        <div className="w-full py-sectionV px-sectionH sm:px-sectionHSm xl:px-sectionHXl">
+        <div className="w-full bg-primaryColor py-sectionV px-sectionH sm:px-sectionHSm xl:px-sectionHXl">
             <ProductDetails product={mockProduct}/>
         </div>
      );

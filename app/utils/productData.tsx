@@ -24,7 +24,7 @@ export const productData = [
     id: "2bb36y",
     name: "Artisanal Ceramic Bowl Set",
     description:
-      "A set of four beautifully glazed ceramic bowls, handmade by local artisans using traditional techniques.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed rhoncus, magna sit amet vehicula tincidunt, elit justo euismod diam, in auctor sapien nibh sed odio. In in velit neque. Sed ac malesuada sem. Nulla non ante eget sapien varius laoreet. Fusce porta odio et mauris dignissim molestie. Ut dictum bibendum odio, sed fermentum felis porta non. Suspendisse potenti. Etiam bibendum rhoncus tristique. Nunc eleifend pharetra erat sed gravida. Quisque tincidunt ut diam sed vulputate. Morbi ex risus, scelerisque sed varius ac, molestie nec enim. Vestibulum tellus sapien, laoreet a magna ac, interdum tincidunt orci. Vestibulum id urna molestie tellus tempus rhoncus. Etiam consectetur ante nec varius volutpat. Fusce pellentesque est faucibus mi elementum, sit amet tempor nunc sollicitudin. Pellentesque vehicula purus lorem, aliquet luctus urna pulvinar luctus.",
     price: 34.5,
     category: "kitchenware",
     inStock: true,

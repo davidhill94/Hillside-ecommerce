@@ -1,5 +1,3 @@
-import { ButtonAlt } from "../buttons/buttons";
-
 const ContactForm = () => {
     return ( 
         <form className="flex flex-col w-full gap-2 text-textPrimary items-start md:items-end">

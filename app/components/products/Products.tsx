@@ -1,7 +1,8 @@
+"use client";
+
 import { productData } from "@/app/utils/productData";
 import ProductCard from "./ProductsCard";
-import mock from "../../../public/images/mockImageOne.jpg";
-import { ButtonAlt } from "../buttons/buttons";
+import { Button } from "../buttons/buttons";
 
 const Products = () => {
   return (
@@ -15,7 +16,7 @@ const Products = () => {
           );
         })}
       </div>
-      <ButtonAlt buttonText="View All Products" />
+      <Button buttonText="View All Products" onClick={() => {}} outline={1} />
     </div>
   );
 };

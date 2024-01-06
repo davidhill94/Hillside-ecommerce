@@ -8,12 +8,12 @@ const Newsletter = () => {
           <h3 className="text-5xl text-textPrimary mb-6 text-center">
             Get notified when we release new products
           </h3>
-          <p className="mb-2 italic">Sign up to our Newsletter to keep up to date with all of our ongoings</p>
-          <form className="flex items-center justify-center w-full sm:w-2/3 md:w-1/2 gap-6">
+          <p className="mb-2 italic text-center">Sign up to our Newsletter to keep up to date with all of our ongoings</p>
+          <form className="flex items-center justify-center w-full lg:w-1/2 gap-6">
             <input
             type="text"
             placeholder="Enter your email to recieve updates"
-            className="w-4/5 p-2 shadow-shadow-input"
+            className="w-4/5 p-2 shadow-shadow-input border border-textPrimary rounded"
             data-lpignore
             ></input>
             <input

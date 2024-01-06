@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Button, ButtonAlt } from "../buttons/buttons";
+import { Button } from "../buttons/buttons";
 import FaqAccordion from "../faq/Faq";
 import Contact from "../contact/contact";
 
@@ -12,17 +12,17 @@ const Help = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-help bg-secondaryColor text-textPrimary py-sectionV px-sectionH sm:px-sectionHSm xl:px-sectionHXl">
+    <div className="flex flex-col items-center justify-start min-h-help w-full bg-secondaryColor text-textPrimary py-sectionV px-sectionH sm:px-sectionHSm xl:px-sectionHXl">
       <div className="flex gap-4 items-center justify-center mb-6">
         {faq ? (
-          <ButtonAlt buttonText="FAQs" onClick={handleFaqContactToggle} />
+          <Button buttonText="FAQs" onClick={handleFaqContactToggle} outline={1} />
         ) : (
           <Button buttonText="FAQs" onClick={handleFaqContactToggle} />
         )}
         {faq ? (
           <Button buttonText="Contact Us" onClick={handleFaqContactToggle} />
         ) : (
-          <ButtonAlt buttonText="Contact Us" onClick={handleFaqContactToggle} />
+          <Button buttonText="Contact Us" onClick={handleFaqContactToggle} outline={1} />
         )}
       </div>
       {faq ? (
