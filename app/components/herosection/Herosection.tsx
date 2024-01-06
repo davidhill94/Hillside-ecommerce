@@ -1,4 +1,4 @@
-import imageHero from "../../images/HeroCarouselOne.jpg";
+import imageHero from "../../../public/images/HeroOne.jpg";
 import { Button, ButtonAlt } from "../buttons/buttons";
 
 const HeroSection = () => {
