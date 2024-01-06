@@ -2,7 +2,7 @@ import Container from "../Container";
 
 const Newsletter = () => {
   return (
-    <div className="bg-primaryColor w-full text-textPrimary">
+    <div className="bg-light-grey w-full text-textPrimary">
       <Container>
         <div className="flex flex-col items-center justify-center py-sectionV">
           <h3 className="text-5xl text-textPrimary mb-6 text-center">
