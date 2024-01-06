@@ -1,5 +1,6 @@
 import { FaStar, FaRegStar, FaRegStarHalfStroke, FaS } from "react-icons/fa6";
 
+//Takes in a number from the products review ratings and converts them into 3 types of star icon that displays the average product rating
 export const generateRating = (num: any) => {
   if (num < 0.25) {
     return (

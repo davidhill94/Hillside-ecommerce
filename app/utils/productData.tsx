@@ -2,6 +2,8 @@ import mockImageOne from "../../public/images/mockImageOne.jpg";
 import mockImageTwo from "../../public/images/mockImageTwo.jpg";
 import mockImageThree from "../../public/images/mockImageThree.jpg";
 import mockReviewImage from "../../public/images/mockReviewImage.jpg";
+
+//Mock Data for products until the database is built and fully functioning
 export const productData = [
   {
     id: "77bjj41",
