@@ -6,7 +6,7 @@ import SetQuantity from "@/app/components/products/setQuantity";
 import { formatPrice } from "@/app/utils/formatPrice";
 import { formatReviews } from "@/app/utils/formatReviews";
 import { generateRating } from "@/app/utils/generateRating";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface ProductDetailsProps {
   product: any;
@@ -23,11 +23,13 @@ export type CartProductType = {
 };
 
 export type SelectedImg = {
-  image: string,
-  id: string
-}
+  image: string;
+  id: string;
+};
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
+
+  const [buttonSize, setButtonSize] = useState(false); 
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -45,42 +47,59 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       0
     ) / product.reviews.length;
 
+  const handleImageSelect = useCallback(
+    (value: SelectedImg) => {
+      setCartProduct((prev) => {
+        return { ...prev, image: value };
+      });
+    },
+    [cartProduct.image]
+  );
 
-    const handleImageSelect = useCallback(
-      (value: SelectedImg) => {
-        setCartProduct((prev) => {
-          return (
-            { ...prev, image: value}
-          )
-        })
-      },
-      [cartProduct.image]
-    )
+  const handleIncrease = useCallback(() => {
+    if (cartProduct.quantity === 99) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return {
+        ...prev,
+        quantity: prev.quantity + 1,
+      };
+    });
+  }, [cartProduct]);
+  const handleDecrease = useCallback(() => {
+    if (cartProduct.quantity === 1) {
+      return;
+    }
+    setCartProduct((prev) => {
+      return {
+        ...prev,
+        quantity: prev.quantity - 1,
+      };
+    });
+  }, [cartProduct]);
 
-    const handleIncrease = useCallback(() => {
-        if(cartProduct.quantity === 99){
-            return;
-        }
-        setCartProduct((prev) => {
-            return {
-                ...prev, quantity: prev.quantity + 1
-            }
-        })
-    }, [cartProduct]);
-    const handleDecrease = useCallback(() => {
-        if(cartProduct.quantity === 1){
-            return;
-        }
-        setCartProduct((prev) => {
-            return {
-                ...prev, quantity: prev.quantity - 1
-            }
-        })
-    }, [cartProduct]);
+  //Handles the resizing of buttons depending on window width - CREATE SEPARATE FILE************
+    const handleButtonResize = () => {
+     if(window.innerWidth < 1024) {
+        setButtonSize(true);
+      } else {
+        setButtonSize(false);
+      }
+    }
+
+    useEffect(() => {
+      window.addEventListener('resize', handleButtonResize);
+      return () => window.removeEventListener('resize', handleButtonResize);
+    }, [handleButtonResize]);
 
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2">
-      <ProductImages cartProduct={cartProduct} product={product} handleImageSelect={handleImageSelect} />
+    <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-2">
+      <ProductImages
+        cartProduct={cartProduct}
+        product={product}
+        handleImageSelect={handleImageSelect}
+      />
       <div className="flex flex-col justify-start gap-2">
         <h2 className="text-2xl">{product.name}</h2>
         <div className="flex justify-start w-full">
@@ -96,18 +115,41 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           {product.inStock ? "In Stock" : "Sorry, Out of Stock"}
         </h4>
         <hr className="my-4 text-textPrimary" />
-        <SetQuantity cartProduct={cartProduct} handleDecrease={handleDecrease} handleIncrease={handleIncrease} />
+        <SetQuantity
+          cartProduct={cartProduct}
+          handleDecrease={handleDecrease}
+          handleIncrease={handleIncrease}
+        />
         <div className="flex flex-col justify-center gap-2 mb-4">
-          <Button 
-          buttonText="Add to Cart"
-          onClick={() => {}}
-          outline={2}
-          />
-          <Button 
-          buttonText="View Cart" 
-          onClick={() => {}}
-          outline={1}
-          />
+          {buttonSize ? (
+            <>
+              <Button
+                buttonText="Add to Cart"
+                onClick={() => {}}
+                outline={2}
+                full
+              />
+              <Button
+                buttonText="View Cart"
+                onClick={() => {}}
+                outline={1}
+                full
+              />
+            </>
+          ) : (
+            <>
+              <Button
+                buttonText="Add to Cart"
+                onClick={() => {}}
+                outline={2}
+                
+              />
+              <Button 
+              buttonText="View Cart" 
+              onClick={() => {}} 
+              outline={1} />
+            </>
+          )}
         </div>
         <p className="text-justify">{product.description}</p>
         <hr className="my-4 text-textPrimary" />

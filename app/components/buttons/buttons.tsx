@@ -3,12 +3,13 @@ interface ButtonProps {
     disabled?: boolean,
     outline?: number,
     small?: boolean,
+    full?: boolean,
     custom?: string,
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 } 
  
 
-export const Button: React.FC<ButtonProps> = ({ buttonText, disabled, outline, small, custom, onClick }) => {
+export const Button: React.FC<ButtonProps> = ({ buttonText, disabled, outline, small, full, custom, onClick }) => {
     return ( 
         <button 
         disabled={disabled}
@@ -31,6 +32,7 @@ export const Button: React.FC<ButtonProps> = ({ buttonText, disabled, outline, s
         ${small ? "text-sm" : "text-base"}
         ${small ? "py-1 px-3" : "py-2 px-6"}
         ${small ? "w-36" : "w-48"}
+        ${full ? "w-full" : "w-48"}
         ${custom ? custom : ""}
         `}
         onClick={onClick}
