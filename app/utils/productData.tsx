@@ -17,6 +17,8 @@ export const productData = [
       {image: mockImageTwo.src},
       {image: mockImageOne.src},
       {image: mockImageThree.src},
+      {image: mockImageThree.src},
+      {image: mockImageThree.src},
     ],
     reviews: []
   },

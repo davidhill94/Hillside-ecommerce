@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/app/components/buttons/buttons";
+import ProductImages from "@/app/components/products/productImages";
 import SetQuantity from "@/app/components/products/setQuantity";
 import { formatPrice } from "@/app/utils/formatPrice";
 import { formatReviews } from "@/app/utils/formatReviews";
@@ -16,10 +17,15 @@ export type CartProductType = {
   name: string;
   description: string;
   category: string;
-  image: string;
+  image: SelectedImg;
   quantity: number;
   price: number;
 };
+
+export type SelectedImg = {
+  image: string,
+  id: string
+}
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const [cartProduct, setCartProduct] = useState<CartProductType>({
@@ -38,6 +44,18 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       (tally: number, item: any) => item.rating + tally,
       0
     ) / product.reviews.length;
+
+
+    const handleImageSelect = useCallback(
+      (value: SelectedImg) => {
+        setCartProduct((prev) => {
+          return (
+            { ...prev, image: value}
+          )
+        })
+      },
+      [cartProduct.image]
+    )
 
     const handleIncrease = useCallback(() => {
         if(cartProduct.quantity === 99){
@@ -62,8 +80,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
   return (
     <section className="grid grid-cols-1 md:grid-cols-2">
-      <div>Images</div>
-      <div className="flex flex-col justify-center gap-2">
+      <ProductImages cartProduct={cartProduct} product={product} handleImageSelect={handleImageSelect} />
+      <div className="flex flex-col justify-start gap-2">
         <h2 className="text-2xl">{product.name}</h2>
         <div className="flex justify-start w-full">
           <h4 className="flex items-center justify-start w-auto mr-2 text-secondaryColor">
