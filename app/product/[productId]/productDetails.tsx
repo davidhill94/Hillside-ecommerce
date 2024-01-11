@@ -56,6 +56,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     [cartProduct.image]
   );
 
+  //Increases the item quantity
   const handleIncrease = useCallback(() => {
     if (cartProduct.quantity === 99) {
       return;
@@ -67,6 +68,8 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       };
     });
   }, [cartProduct]);
+
+  //Decreases the item quantity
   const handleDecrease = useCallback(() => {
     if (cartProduct.quantity === 1) {
       return;
@@ -88,6 +91,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
       }
     }
 
+    //Rerenders button size when screen is resized
     useEffect(() => {
       window.addEventListener('resize', handleButtonResize);
       return () => window.removeEventListener('resize', handleButtonResize);
