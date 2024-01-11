@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Container from "../Container";
 import FooterList from "./FooterList";
-
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import Socials from "../socials/socials";
 
 const Footer = () => {
     return ( 
@@ -31,12 +30,7 @@ const Footer = () => {
                     </div>
                     <FooterList>
                     <h3 className="font-semibold mb-2">Follow Us</h3>
-                    <div className="flex gap-2 text-xl">
-                        <Link href="#"><FaFacebook /></Link>
-                        <Link href="#"><FaInstagram /></Link>
-                        <Link href="#"><FaTwitter /></Link>
-                        <Link href="#"><FaYoutube /></Link>
-                    </div>
+                    <Socials />
                     </FooterList>
                 </div>
                 <div className="flex flex-col items-center p-6">
