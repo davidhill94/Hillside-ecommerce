@@ -1,7 +1,11 @@
+"use client";
+
+import CartClient from "./cartClient";
+
 const Cart = () => {
     return ( 
-        <div>
-            Cart Page
+        <div className="bg-primaryColor py-sectionV px-sectionH sm:px-sectionHSm xl:px-sectionHXl">
+            <CartClient />
         </div>
      );
 }

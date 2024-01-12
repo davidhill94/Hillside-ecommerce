@@ -34,7 +34,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
   const router = useRouter();
   const {handleAddToCart, cartProducts} = useCart();
   const [isProductInCart, setIsProductInCart] = useState(false);
-  const [buttonSize, setButtonSize] = useState(false); 
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
     name: product.name,
@@ -100,21 +99,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     });
   }, [cartProduct]);
 
-  //Handles the resizing of buttons depending on window width - CREATE SEPARATE FILE************
-    const handleButtonResize = () => {
-     if(window.innerWidth < 1024) {
-        setButtonSize(true);
-      } else {
-        setButtonSize(false);
-      }
-    }
-
-    //Rerenders button size when screen is resized
-    useEffect(() => {
-      window.addEventListener('resize', handleButtonResize);
-      return () => window.removeEventListener('resize', handleButtonResize);
-    }, [handleButtonResize]);
-
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-2">
       <ProductImages
@@ -143,37 +127,17 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           handleIncrease={handleIncrease}
         />
         <div className="flex flex-col justify-center gap-2 mb-4">
-          {buttonSize ? (
-            <>
               <Button
                 buttonText={isProductInCart ? "Item in Cart" : "Add to Cart"}
                 onClick={() => isProductInCart ? null : handleAddToCart(cartProduct)}
                 outline={2}
-                full
                 disabled={isProductInCart ? true : false}
               />
               <Button
                 buttonText="View Cart"
                 onClick={() => router.push("/cart")}
                 outline={1}
-                full
               />
-            </>
-          ) : (
-            <>
-              <Button
-                buttonText={isProductInCart ? "Item in Cart" : "Add to Cart"}
-                onClick={() => isProductInCart ? null : handleAddToCart(cartProduct)}
-                outline={2}
-                disabled={isProductInCart ? true : false}
-                
-              />
-              <Button 
-              buttonText="View Cart" 
-              onClick={() => router.push("/cart")}
-              outline={1} />
-            </>
-          )}
         </div>
         <p className="text-justify">{product.description}</p>
         <hr className="my-4 text-light-primary" />

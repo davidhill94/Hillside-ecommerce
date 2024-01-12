@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
 interface ButtonProps { 
     buttonText: string,
     disabled?: boolean,
@@ -10,6 +14,28 @@ interface ButtonProps {
  
 
 export const Button: React.FC<ButtonProps> = ({ buttonText, disabled, outline, small, full, custom, onClick }) => {
+
+    const [buttonSize, setButtonSize] = useState(false);
+
+ //Handles the resizing of buttons depending on window width - CREATE SEPARATE FILE************
+ const handleButtonResize = () => {
+    if (window.innerWidth < 1024) {
+      setButtonSize(true);
+    } else {
+      setButtonSize(false);
+    }
+  };
+
+  useEffect(() => {
+    handleButtonResize();
+  }, []);
+
+   //Rerenders button size when screen is resized
+   useEffect(() => {
+    window.addEventListener('resize', handleButtonResize);
+    return () => window.removeEventListener('resize', handleButtonResize);
+  }, [handleButtonResize]);
+
     return ( 
         <button 
         disabled={disabled}
@@ -32,6 +58,7 @@ export const Button: React.FC<ButtonProps> = ({ buttonText, disabled, outline, s
         ${small ? "text-sm" : "text-base"}
         ${small ? "py-1 px-3" : "py-2 px-6"}
         ${small ? "w-36" : "w-48"}
+        ${buttonSize ? "w-full" : "w-48"}
         ${full ? "w-full" : "w-48"}
         ${custom ? custom : ""}
         `}
