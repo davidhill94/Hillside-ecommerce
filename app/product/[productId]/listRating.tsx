@@ -1,5 +1,6 @@
 "use client";
 
+import Avatar from "@/app/components/products/Avatar";
 import Heading from "@/app/components/products/Headings";
 import { generateRating } from "@/app/utils/generateRating";
 import moment from "moment";
@@ -18,7 +19,7 @@ const ListRating: React.FC<ListRatingProps> = ({ product }) => {
             return (
               <div key={review.id} className="flex flex-col">
                 <div className="flex items-center gap-2">
-                  <div>avatar</div>
+                  <Avatar src={review?.user.image}/>
                   <h3 className="font-semibold font-xl">{review?.user.name}</h3>
                 </div>
                 <div className="flex items-center gap-2">

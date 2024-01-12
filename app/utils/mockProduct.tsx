@@ -25,7 +25,7 @@ export const mockProduct = {
   ],
   reviews: [
     {
-      id: "84gbjw2",
+      id: "7f3gb2",
       userId: "jdnjnvjr353",
       productId: "2bb36y",
       rating: 4,
@@ -36,9 +36,7 @@ export const mockProduct = {
         name: "J Bloggs",
         email: "JJJBlogs@gmail.com",
         emailVerification: null,
-        images: [
-          { image: mockReviewImage.src },
-        ],
+        image: mockReviewImage.src,
         hashedPassword: null,
         createdAt: "2023-05-25T15:50:43.558Z",
         updatedAt: "2023-05-25T15:50:43.558Z",
@@ -57,9 +55,7 @@ export const mockProduct = {
         name: "C Ronaldo",
         email: "ronaldo@gmail.com",
         emailVerification: null,
-        images: [
-          { image: mockReviewImage.src },
-        ],
+        image: null,
         hashedPassword: null,
         createdAt: "2023-05-25T15:50:43.558Z",
         updatedAt: "2023-05-25T15:50:43.558Z",
