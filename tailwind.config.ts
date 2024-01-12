@@ -16,6 +16,8 @@ const config: Config = {
       tertiary: "#B0C5CA",
       textPrimary: "#333333",
       light: {
+        primary: "#B0B0B0",
+        secondary: "#89A89D",
         white: "#FFFFFF",
         grey: "#F5F5F5",
         cream: "#F1ECE9",

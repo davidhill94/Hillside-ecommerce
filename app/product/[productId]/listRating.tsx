@@ -31,7 +31,7 @@ const ListRating: React.FC<ListRatingProps> = ({ product }) => {
                   </div>
                 </div>
                 <div>{review.comment}</div>
-                <hr className="mt-4 w-full text-fontPrimary" />
+                <hr className="mt-4 w-full text-light-primary" />
               </div>
             );
           })}

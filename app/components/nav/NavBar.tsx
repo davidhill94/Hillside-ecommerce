@@ -4,7 +4,7 @@ import { FaSearch, FaShoppingCart, FaUserCircle } from "react-icons/fa";
 
 const NavBar = () => {
   return (
-    <div className="sticky top-0 w-full bg-primaryColor text-textPrimary font-semibold z-30 shadow-sm">
+    <div className="sticky top-0 w-full bg-primaryColor text-textPrimary font-semibold z-30 shadow-sm border-light-primary">
       <div className="py-4">
         <Container>
           <div className="flex items-center justify-between gap-3 md:gap-0">

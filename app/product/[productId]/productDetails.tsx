@@ -136,7 +136,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
         <h4 className={product.inStock ? "text-inStock" : "text-outOfStock"}>
           {product.inStock ? "In Stock" : "Sorry, Out of Stock"}
         </h4>
-        <hr className="my-4 text-textPrimary" />
+        <hr className="my-4 text-light-primary" />
         <SetQuantity
           cartProduct={cartProduct}
           handleDecrease={handleDecrease}
@@ -176,7 +176,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           )}
         </div>
         <p className="text-justify">{product.description}</p>
-        <hr className="my-4 text-textPrimary" />
+        <hr className="my-4 text-light-primary" />
         <div className="flex flex-col gap-1">
           <h4>
             <span className="font-semibold">CATEGORY: </span>
