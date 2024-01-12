@@ -3,9 +3,11 @@
 import { Button } from "@/app/components/buttons/buttons";
 import ProductImages from "@/app/components/products/productImages";
 import SetQuantity from "@/app/components/products/setQuantity";
+import { useCart } from "@/app/hooks/useCart";
 import { formatPrice } from "@/app/utils/formatPrice";
 import { formatReviews } from "@/app/utils/formatReviews";
 import { generateRating } from "@/app/utils/generateRating";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
 interface ProductDetailsProps {
@@ -29,6 +31,9 @@ export type SelectedImg = {
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
 
+  const router = useRouter();
+  const {handleAddToCart, cartProducts} = useCart();
+  const [isProductInCart, setIsProductInCart] = useState(false);
   const [buttonSize, setButtonSize] = useState(false); 
   const [cartProduct, setCartProduct] = useState<CartProductType>({
     id: product.id,
@@ -39,6 +44,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     quantity: 1,
     price: product.price,
   });
+
+  //Checks to see if a product is already in the cart
+  useEffect(() => {
+    setIsProductInCart(false);
+
+    if(cartProducts){
+      const existingIndex = cartProducts.findIndex((item) => item.id === product.id);
+      if(existingIndex > -1){
+        setIsProductInCart(true);
+      }
+    }
+
+  }, [cartProducts])
 
   //averages out the review ratings - tallies up the total rating sum and divides by the number of reviews
   const productRatingAvg =
@@ -128,14 +146,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           {buttonSize ? (
             <>
               <Button
-                buttonText="Add to Cart"
-                onClick={() => {}}
+                buttonText={isProductInCart ? "Item in Cart" : "Add to Cart"}
+                onClick={() => isProductInCart ? null : handleAddToCart(cartProduct)}
                 outline={2}
                 full
+                disabled={isProductInCart ? true : false}
               />
               <Button
                 buttonText="View Cart"
-                onClick={() => {}}
+                onClick={() => router.push("/cart")}
                 outline={1}
                 full
               />
@@ -143,14 +162,15 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
           ) : (
             <>
               <Button
-                buttonText="Add to Cart"
-                onClick={() => {}}
+                buttonText={isProductInCart ? "Item in Cart" : "Add to Cart"}
+                onClick={() => isProductInCart ? null : handleAddToCart(cartProduct)}
                 outline={2}
+                disabled={isProductInCart ? true : false}
                 
               />
               <Button 
               buttonText="View Cart" 
-              onClick={() => {}} 
+              onClick={() => router.push("/cart")}
               outline={1} />
             </>
           )}
