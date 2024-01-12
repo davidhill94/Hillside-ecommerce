@@ -25,7 +25,7 @@ const Help = () => {
           <Button buttonText="Contact Us" onClick={handleFaqContactToggle} outline={1} />
         )}
       </div>
-      <hr className="my-2 w-full md:w-2/3 lg:w-1/2 text-light-secondary" />
+      <hr className={`${faq ? "mb-2" : "mb-6"} w-full md:w-2/3 lg:w-1/2 text-light-secondary`} />
       {faq ? (
         <div className="w-full md:w-1/2 lg:w-2/5 flex items-center justify-center">
           <FaqAccordion />
