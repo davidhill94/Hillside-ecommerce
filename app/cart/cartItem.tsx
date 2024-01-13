@@ -18,8 +18,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
             src={item.image.image}
             alt={item.name}
             className="object-contain"
-            width={120}
-            height={120}
+            width={80}
+            height={80}
           />
         </Link>
         <div className="flex flex-col items-start justify-between h-full">
@@ -39,6 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
       </div>
       <div className="justify-self-center">
         <SetQuantity 
+        cartCounter
         cartProduct={item} 
         handleDecrease={() => {}}
         handleIncrease={() => {}}

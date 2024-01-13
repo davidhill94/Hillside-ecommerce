@@ -21,13 +21,13 @@ const CartClient = () => {
   return (
     <Container>
       <Heading title="Shopping Cart" center />
-      <div className="grid grid-cols-5 gap-2 items-center">
+      <div className="grid grid-cols-5 gap-2 items-center mb-2">
         <p className="col-span-2 justify-self-start">PRODUCT</p>
         <p className="justify-self-center">PRICE</p>
         <p className="justify-self-center">QUANTITY</p>
         <p className="justify-self-end">TOTAL</p>
       </div>
-      <div>
+      <div className="mb-4">
         {cartProducts.map((item) => {
           return (
             <CartItem key={item.id} item={item} />
