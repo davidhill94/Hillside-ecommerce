@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Container from "../components/Container";
 import { Button } from "../components/buttons/buttons";
 import Heading from "../components/products/Headings";
 import { useCart } from "../hooks/useCart";
+import CartItem from "./cartItem";
 
 const CartClient = () => {
   const { cartProducts } = useCart();
@@ -30,9 +30,7 @@ const CartClient = () => {
       <div>
         {cartProducts.map((item) => {
           return (
-            <div key={item.id}>
-              <p>{item.name}</p>
-            </div>
+            <CartItem key={item.id} item={item} />
           );
         })}
       </div>
