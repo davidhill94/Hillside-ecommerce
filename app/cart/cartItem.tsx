@@ -4,14 +4,18 @@ import { formatPrice } from "../utils/formatPrice";
 import Image from "next/image";
 import { truncateText } from "../utils/truncateFunction";
 import SetQuantity from "../components/products/setQuantity";
+import { useCart } from "../hooks/useCart";
 
 interface CartItemProps {
   item: CartProductType;
 }
 
 const CartItem: React.FC<CartItemProps> = ({ item }) => {
+
+  const { handleRemoveFromCart, handleCartQuantityIncrease, handleCartQuantityDecrease } = useCart();
+
   return (
-    <div className="grid grid-cols-5 gap-2 items-center border-y border-y-light-primary py-4">
+    <div className="grid md:grid-cols-5 gap-2 items-center border-b border-b-light-primary py-4">
       <div className="col-span-2 justify-self-start flex items-start justify-start gap-4 h-full">
         <Link href={`/product/${item.id}`}>
           <Image
@@ -29,7 +33,7 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
           >
             {truncateText(item.name)}
           </Link>
-          <button className="underline" onClick={() => {}}>
+          <button className="underline" onClick={() => handleRemoveFromCart(item)}>
             Remove
           </button>
         </div>
@@ -41,8 +45,8 @@ const CartItem: React.FC<CartItemProps> = ({ item }) => {
         <SetQuantity 
         cartCounter
         cartProduct={item} 
-        handleDecrease={() => {}}
-        handleIncrease={() => {}}
+        handleDecrease={() => {handleCartQuantityDecrease(item)}}
+        handleIncrease={() => {handleCartQuantityIncrease(item)}}
         />
       </div>
       <div className="justify-self-end">

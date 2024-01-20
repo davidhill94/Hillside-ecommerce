@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Container from "../Container";
 import { FaSearch, FaShoppingCart, FaUserCircle } from "react-icons/fa";
+import CartCount from "./cartCount";
 
 const NavBar = () => {
   return (
@@ -13,9 +14,9 @@ const NavBar = () => {
               <div>Shop</div>
               <div>About Us</div>
               <div>Contact</div>
-              <div className="flex items-center gap-4 md:gap-6 text-xl">
+              <div className="flex items-center gap-4 md:gap-6 text-2xl">
                 <div className="hidden md:block"><FaSearch /></div>
-                <div><FaShoppingCart /></div>
+                <CartCount />
                 <div><FaUserCircle /></div>
               </div>
             </div>

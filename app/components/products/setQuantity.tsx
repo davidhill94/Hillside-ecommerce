@@ -7,6 +7,7 @@ interface SetQuantityProps {
   cartProduct: CartProductType;
   handleIncrease: () => void;
   handleDecrease: () => void;
+  start?: boolean
 }
 
 const SetQuantity: React.FC<SetQuantityProps> = ({
@@ -14,11 +15,12 @@ const SetQuantity: React.FC<SetQuantityProps> = ({
   cartProduct,
   handleIncrease,
   handleDecrease,
+  start,
 }) => {
   const buttonStyle = "w-1/3 border rounded font-semibold shadow-input";
 
   return (
-    <div className="flex items-center justify-center w-48 gap-1">
+    <div className={`flex items-center ${start ? "justify-start" : "justify-center"} w-48 gap-1`}>
       {cartCounter ? null : (
         <h2 className="w-1/2 font-semibold text-textPrimary">Quantity: </h2>
       )}

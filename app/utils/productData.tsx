@@ -14,11 +14,14 @@ export const productData = [
     category: "wall_decor",
     inStock: true,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
-      {image: mockImageThree.src},
-      {image: mockImageThree.src},
-      {image: mockImageThree.src},
+      { image: mockImageOne.src, id: "84792nchjs" },
+      { image: mockImageTwo.src, id: "84nd38nchjs" },
+      { image: mockImageThree.src, id: "873bbjws" },
+      { image: mockImageOne.src, id: "8734yux" },
+      { image: mockImageTwo.src, id: "88hxj8rh" },
+      { image: mockImageThree.src, id: "94hfjws" },
+      { image: mockImageOne.src, id: "8ydhbhx" },
+      { image: mockImageTwo.src, id: "jd38b8rh" },
     ],
     reviews: []
   },
@@ -31,9 +34,9 @@ export const productData = [
     category: "kitchenware",
     inStock: true,
     images: [
-      {image: mockImageThree.src},
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
+      { image: mockImageThree.src, id: "bywtw" },
+      { image: mockImageOne.src, id: "8ydnbuwhbhx" },
+      { image: mockImageTwo.src, id: "76gebnw" },
     ],
     reviews: [
       {
@@ -93,9 +96,9 @@ export const productData = [
     category: "kitchenware",
     inStock: false,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageThree.src},
-      {image: mockImageOne.src},
+      { image: mockImageThree.src, id: "vstst" },
+      { image: mockImageOne.src, id: "9ubege" },
+      { image: mockImageTwo.src, id: "0838yhy" },
     ],
     reviews: [
       {
@@ -132,9 +135,9 @@ export const productData = [
     category: "wall_decor",
     inStock: true,
     images: [
-      {image: mockImageOne.src},
-      {image: mockImageTwo.src},
-      {image: mockImageThree.src},
+      { image: mockImageTwo.src, id: "bhywvs" },
+      { image: mockImageOne.src, id: "pkmcen" },
+      { image: mockImageTwo.src, id: "njbwhg" },
     ],
     reviews: []
   },
@@ -147,9 +150,10 @@ export const productData = [
     category: "kitchenware",
     inStock: true,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
-      {image: mockImageThree.src},
+      { image: mockImageTwo.src, id: "vw6wtyw" },
+      { image: mockImageThree.src, id: "c3g7bn" },
+      { image: mockImageOne.src, id: "v6f3v" },
+      { image: mockImageTwo.src, id: "jnstys" },
     ],
     reviews: []
   },
@@ -162,9 +166,10 @@ export const productData = [
     category: "kitchenware",
     inStock: false,
     images: [
-      {image: mockImageThree.src},
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
+      { image: mockImageThree.src, id: "nceu7e" },
+      { image: mockImageOne.src, id: "kknbvw" },
+      { image: mockImageTwo.src, id: "84gfb" },
+      { image: mockImageThree.src, id: "jbvw76" },
     ],
     reviews: []
   },
@@ -177,9 +182,9 @@ export const productData = [
     category: "bags",
     inStock: true,
     images: [
-      {image: mockImageOne.src},
-      {image: mockImageTwo.src},
-      {image: mockImageThree.src},
+      { image: mockImageOne.src, id: "7g3d" },
+      { image: mockImageTwo.src, id: "dwr4wdc2" },
+      { image: mockImageThree.src, id: "tgd53f" },
     ],
     reviews: [
       {
@@ -212,9 +217,9 @@ export const productData = [
     category: "wall_decor",
     inStock: true,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
-      {image: mockImageThree.src},
+      { image: mockImageOne.src, id: "n2onbx" },
+      { image: mockImageOne.src, id: "5d2cfvbd" },
+      { image: mockImageTwo.src, id: "v6d2tg" },
     ],
     reviews: []
   },
@@ -227,9 +232,9 @@ export const productData = [
     category: "kitchenware",
     inStock: true,
     images: [
-      {image: mockImageThree.src},
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
+      { image: mockImageThree.src, id: "8g7f2" },
+      { image: mockImageOne.src, id: "lqxmox3k" },
+      { image: mockImageTwo.src, id: "k2pmow" },
     ],
     reviews: [
       {
@@ -266,9 +271,10 @@ export const productData = [
     category: "kitchenware",
     inStock: false,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageThree.src},
-      {image: mockImageOne.src},
+      { image: mockImageOne.src, id: "bhxwub" },
+      { image: mockImageTwo.src, id: "frayuw" },
+      { image: mockImageThree.src, id: "dtr63" },
+      { image: mockImageTwo.src, id: "cxw53u" },
     ],
     reviews: [
       {
@@ -305,9 +311,11 @@ export const productData = [
     category: "kitchenware",
     inStock: true,
     images: [
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
-      {image: mockImageThree.src},
+      { image: mockImageTwo.src, id: "7dgb" },
+      { image: mockImageThree.src, id: "8h3di" },
+      { image: mockImageOne.src, id: "kwnkk" },
+      { image: mockImageTwo.src, id: "oojwbbb" },
+      { image: mockImageThree.src, id: "84yuhghbn" },
     ],
     reviews: []
   },
@@ -320,9 +328,11 @@ export const productData = [
     category: "kitchenware",
     inStock: false,
     images: [
-      {image: mockImageThree.src},
-      {image: mockImageTwo.src},
-      {image: mockImageOne.src},
+      { image: mockImageThree.src, id: "73rbhjws" },
+      { image: mockImageOne.src, id: "87302dkn4yux" },
+      { image: mockImageTwo.src, id: "8fnij" },
+      { image: mockImageThree.src, id: "nsqk09b" },
+      { image: mockImageTwo.src, id: "7gdkw" },
     ],
     reviews: []
   },
