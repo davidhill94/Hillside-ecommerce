@@ -40,7 +40,7 @@ export const productData = [
     ],
     reviews: [
       {
-        id: "84gbjw2",
+        id: "8484w2",
         userId: "jdnjnvjr353",
         productId: "2bb36y",
         rating: 4,

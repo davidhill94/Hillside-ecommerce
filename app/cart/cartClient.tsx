@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Container from "../components/Container";
 import { Button } from "../components/buttons/buttons";
-import Heading from "../components/products/Headings";
+import Heading from "../components/Headings";
 import { useCart } from "../hooks/useCart";
 import { formatPrice } from "../utils/formatPrice";
 import CartItem from "./cartItem";
@@ -41,7 +41,7 @@ const CartClient = () => {
 
   return (
     <Container>
-      <Heading title="Shopping Cart" center />
+      <Heading title="Shopping Cart" center borderBottom/>
       <div className="hidden md:grid grid-cols-5 gap-2 items-center mb-2 text-sm md:text-lg border-b border-b-light-primary">
         <p className="col-span-2 justify-self-start">PRODUCT</p>
         <p className="justify-self-center">PRICE</p>
