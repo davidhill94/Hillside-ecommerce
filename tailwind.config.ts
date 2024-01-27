@@ -24,7 +24,8 @@ const config: Config = {
       },
       black: "#000000",
       inStock: "#38761d",
-      outOfStock: "#990000"
+      outOfStock: "#990000",
+      googleIcon: "#DB4437"
     },
     extend: {
       backgroundImage: {

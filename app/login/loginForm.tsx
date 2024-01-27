@@ -9,7 +9,7 @@ import { Button } from "../components/buttons/buttons";
 import Link from "next/link";
 import { AiOutlineGoogle } from "react-icons/ai"
 
-const RegisterForm = () => {
+const LoginForm = () => {
 
 const [isLoading, setIsLoading] = useState(false);
 
@@ -17,7 +17,6 @@ const {register, handleSubmit, formState: {errors}} = useForm<FieldValues>({
     defaultValues:{
         email: "",
         password: "",
-        name: "",
     }
 })
 
@@ -28,9 +27,9 @@ console.log(data)
 
     return ( 
         <>
-        <Heading title="Title for Register" />
+        <Heading title="Sign in to Hillside" />
         <Button 
-        buttonText="Sign up with Google"
+        buttonText="Continue with Google"
         icon={AiOutlineGoogle}
         onClick={() => {}}
         outline={4}
@@ -40,14 +39,6 @@ console.log(data)
         small
         />
         <hr className="my-4 text-light-primary w-full"></hr>
-        <Input
-        id="name"
-        label="Name"
-        disabled={isLoading}
-        register={register}
-        errors={errors}
-        required
-        />
         <Input
         id="email"
         label="Email"
@@ -66,7 +57,7 @@ console.log(data)
         type="password"
         />
         <Button
-        buttonText={isLoading ? "Loading" : "Register"}
+        buttonText={isLoading ? "Loading" : "Login"}
         onClick={handleSubmit(onSubmit)}
         outline={1}
         custom="font-semibold"
@@ -74,13 +65,13 @@ console.log(data)
         full
         />
         <p className="text-sm">
-            Already have an account?
-            <Link href="/login" className="underline ml-1">
-            Log in
+            Don't have an account?
+            <Link href="/register" className="underline ml-1">
+            Register
             </Link>
         </p>
         </>
      );
 }
  
-export default RegisterForm;
+export default LoginForm;

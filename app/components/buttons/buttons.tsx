@@ -1,6 +1,5 @@
 "use client";
 
-import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useEffect, useState } from "react";
 import { IconType } from "react-icons";
 
@@ -12,6 +11,7 @@ interface ButtonProps {
   small?: boolean;
   full?: boolean;
   custom?: string;
+  customIcon?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -23,6 +23,7 @@ export const Button: React.FC<ButtonProps> = ({
   small,
   full,
   custom,
+  customIcon,
   onClick,
 }) => {
   const [buttonSize, setButtonSize] = useState(false);
@@ -65,27 +66,10 @@ export const Button: React.FC<ButtonProps> = ({
         shadow-input
         disabled:opacity-80
         disabled:cursor-not-allowed
-        ${
-          outline === 1
-            ? "bg-textPrimary"
-            : outline === 2
-            ? "bg-secondaryColor"
-            : "bg-transparent"
-        }
-        ${
-          outline === 1
-            ? "border-textPrimary"
-            : outline === 2
-            ? "border-secondaryColor"
-            : "border-primaryColor"
-        }
-        ${
-          outline === 1
-            ? "text-primaryColor"
-            : outline === 2
-            ? "text-textPrimary"
-            : "text-primaryColor"
-        }
+        ${outline === 1 ? "bg-textPrimary border-textPrimary text-primaryColor" : ""}
+        ${outline === 2 ? "bg-secondaryColor border-secondaryColor text-primaryColor" : ""}
+        ${outline === 3 ? "bg-transparent border-primaryColor text-primaryColor" : ""}
+        ${outline === 4 ? "bg-light-white border-textPrimary text-textPrimary" : ""}
         ${small ? "text-sm" : "text-base"}
         ${small ? "py-1 px-3" : "py-2 px-6"}
         ${small ? "w-36" : "w-48"}
@@ -95,7 +79,7 @@ export const Button: React.FC<ButtonProps> = ({
         `}
       onClick={onClick}
     >
-      {Icon && <Icon className="mr-2" size={24} />}
+      {Icon && <Icon className={`${customIcon ? customIcon : ""}`} />}
       {buttonText}
     </button>
   );
