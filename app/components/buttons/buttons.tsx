@@ -67,7 +67,7 @@ export const Button: React.FC<ButtonProps> = ({
         disabled:opacity-80
         disabled:cursor-not-allowed
         ${outline === 1 ? "bg-textPrimary border-textPrimary text-primaryColor" : ""}
-        ${outline === 2 ? "bg-secondaryColor border-secondaryColor text-primaryColor" : ""}
+        ${outline === 2 ? "bg-secondaryColor border-secondaryColor text-textPrimary" : ""}
         ${outline === 3 ? "bg-transparent border-primaryColor text-primaryColor" : ""}
         ${outline === 4 ? "bg-light-white border-textPrimary text-textPrimary" : ""}
         ${small ? "text-sm" : "text-base"}
