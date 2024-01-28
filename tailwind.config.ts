@@ -18,7 +18,6 @@ const config: Config = {
       light: {
         primary: "#B0B0B0",
         secondary: "#89A89D",
-        white: "#FFFFFF",
         grey: "#F5F5F5",
         cream: "#F1ECE9",
       },
@@ -44,6 +43,7 @@ const config: Config = {
       },
       boxShadow: {
         input: "box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);",
+        dropdown: "box-shadow: 2px 2px 10px 5px rgba(0,0,0,0.7);",
       },
     },
   },

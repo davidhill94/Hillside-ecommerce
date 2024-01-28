@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../components/inputs/input";
 import Heading from "../components/Headings";
 import { register } from "module";
@@ -12,8 +12,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { SafeUser } from "@/types";
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  currentUser: SafeUser | null;
+}
+
+const RegisterForm: React.FC<RegisterFormProps> = ({ currentUser }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -30,25 +35,36 @@ const RegisterForm = () => {
 
   const router = useRouter();
 
+  //handles submit - sets Loading state, and makes api call to submit form data - redirects to cart page on completion
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-
-    axios
-      .post("/api/register", data)
-      .then(() => {
-        toast.success("Your account has been created");
-        router.push("/login")
-      })
+    axios.post("/api/register", data).then(() => {
+      toast.success("Your account has been created");
+      router.push("/login");
+    });
   };
+
+  //checks to see if user is logged in and pushes them to the cart it true
+  useEffect(() => {
+    if (currentUser) {
+      router.push("/cart");
+      router.refresh();
+    }
+  }, []);
+
+  //if user is logged in - generates redirecting text
+  if (currentUser) {
+    return <p className="text-center">Logged in. Redirecting...</p>;
+  }
 
   return (
     <>
       <Heading title="Title for Register" />
       <Button
-        buttonText="Sign up with Google"
+        buttonText="Register with Google"
         icon={AiOutlineGoogle}
-        onClick={() => {}}
+        onClick={() => {signIn('google')}}
         outline={4}
         custom="font-semibold"
         customIcon="text-googleIcon text-2xl mr-2"

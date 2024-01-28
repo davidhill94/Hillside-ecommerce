@@ -1,11 +1,13 @@
+import { getCurrentUser } from "../actions/getCurrentUser";
 import FormWrap from "../components/FormWrap";
 import LoginForm from "./loginForm";
 
-const Login = () => {
+const Login = async () => {
+  const currentUser: any = await getCurrentUser();
   return (
     <div className="bg-primaryColor py-sectionV">
       <FormWrap>
-        <LoginForm />
+        <LoginForm currentUser={currentUser}/>
       </FormWrap>
     </div>
   );
