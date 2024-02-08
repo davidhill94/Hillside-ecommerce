@@ -17,6 +17,8 @@ type CartContextType = {
   handleCartQuantityIncrease: (product: CartProductType) => void;
   handleCartQuantityDecrease: (product: CartProductType) => void;
   handleClearCart: () => void;
+  paymentIntent: string | null;
+  handleSetPaymentIntent: (val: string | null) => void;
 };
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -31,13 +33,21 @@ export const CartContextProvider = (props: Props) => {
   const [cartProducts, setCartProducts] = useState<CartProductType[] | null>(
     null
   );
+const [paymentIntent, setPaymentIntent] = useState<string | null>(null)
 
   //Retrieves local storage cart data and updates the cart
   useEffect(() => {
     const cartItems: any = localStorage.getItem("HillsideCart");
     const cartStorageProducts: CartProductType[] | null = JSON.parse(cartItems);
+    const hillsidePaymentIntent:any = localStorage.getItem('hillsidePaymentIntent')
+    const paymentIntent: string | null = JSON.parse(hillsidePaymentIntent)
+
     setCartProducts(cartStorageProducts);
+    setPaymentIntent(paymentIntent)
   }, []);
+
+  console.log("PAYMENTINTENT:", paymentIntent)
+
 
   //Updates the total amount figure when items are added and removed
   useEffect(() => {
@@ -158,6 +168,12 @@ export const CartContextProvider = (props: Props) => {
     toast.success("Cart cleared");
   }, []);
 
+  const handleSetPaymentIntent = useCallback((val: string | null) => {
+    console.log("VAL:", val)
+    setPaymentIntent(val)
+    localStorage.setItem('hillsidePaymentIntent', JSON.stringify(val))
+  }, [paymentIntent])
+
   const value = {
     cartTotalQuantity,
     cartTotalAmount,
@@ -167,6 +183,8 @@ export const CartContextProvider = (props: Props) => {
     handleCartQuantityIncrease,
     handleCartQuantityDecrease,
     handleClearCart,
+    paymentIntent,
+    handleSetPaymentIntent,
   };
 
   return <CartContext.Provider value={value} {...props} />;

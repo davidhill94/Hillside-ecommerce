@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import prisma from "@/libs/primsadb";
+import prisma from "@/libs/prismadb";
 import { NextResponse  } from "next/server";
 
 //API route for creating a user
