@@ -8,6 +8,8 @@ import { useCart } from "../hooks/useCart";
 import { formatPrice } from "../utils/formatPrice";
 import CartItem from "./cartItem";
 import CartItemMobile from "./cartItemMobile";
+import CheckoutClient from "../checkout/checkoutClient";
+import Link from "next/link";
 
 const CartClient = () => {
   const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
@@ -101,7 +103,9 @@ const CartClient = () => {
           <p className="w-full italic font-light">
             Tax and Shipping calculated on Checkout
           </p>
+          <Link href="/checkout" className="w-full">
           <Button buttonText="Checkout" onClick={() => {}} outline={2} full />
+          </Link>
         </div>
       </div>
     </Container>

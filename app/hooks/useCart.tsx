@@ -44,6 +44,7 @@ const [paymentIntent, setPaymentIntent] = useState<string | null>(null)
 
     setCartProducts(cartStorageProducts);
     setPaymentIntent(paymentIntent)
+    console.log("PAYINTENT",paymentIntent)
   }, []);
 
   console.log("PAYMENTINTENT:", paymentIntent)

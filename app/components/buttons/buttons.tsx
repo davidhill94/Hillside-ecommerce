@@ -63,7 +63,6 @@ export const Button: React.FC<ButtonProps> = ({
         cursor-pointer 
         shadow-input 
         rounded-sm
-        shadow-input
         disabled:opacity-80
         disabled:cursor-not-allowed
         ${outline === 1 ? "bg-textPrimary border-textPrimary text-primaryColor" : ""}

@@ -3,7 +3,7 @@ import Container from "../Container";
 import { FaSearch } from "react-icons/fa";
 import CartCount from "./cartCount";
 import UserMenu from "./userMenu";
-import { getCurrentUser } from "@/app/actions/getCurrentUser";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 
 const NavBar = async () => {
 
