@@ -36,6 +36,7 @@ const CheckoutClient = () => {
         }),
       })
         .then((res) => {
+          console.log("HERE")
           setLoading(false);
           if (res.status === 401) {
             return router.push("/login");
@@ -44,6 +45,7 @@ const CheckoutClient = () => {
           return res.json();
         })
         .then((data) => {
+          console.log("HERE")
           setClientSecret(data.paymentIntent.client_secret);
           handleSetPaymentIntent(data.paymentIntent.id);
         })
