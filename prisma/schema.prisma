@@ -41,17 +41,17 @@ model User {
     orders   Order[]
 }
 
-model Order {
-    id              String            @id @default(auto()) @map("_id") @db.ObjectId
-    userId          String            @db.ObjectId
-    amount          Float
-    currency        String
-    status          String
-    deliveryStatus  String?
-    createDate      DateTime          @default(now())
-    paymentIntentId String            @unique
-    products        CartProductType[]
-    address         Address?
+model Order{
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  amount Float
+  currency String
+  status String
+  deliveryStatus String?
+  createDate DateTime @default(now())
+  paymentIntentId String @unique
+  products CartProductType[]
+  address Address?
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -66,9 +66,10 @@ type CartProductType {
     price       Float
 }
 
+
 type Image {
     image String
-    Id    String
+    id    String
 }
 
 type Address {

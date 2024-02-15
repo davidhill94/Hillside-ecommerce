@@ -8,12 +8,11 @@ import { useCart } from "../hooks/useCart";
 import { formatPrice } from "../utils/formatPrice";
 import CartItem from "./cartItem";
 import CartItemMobile from "./cartItemMobile";
-import CheckoutClient from "../checkout/checkoutClient";
 import Link from "next/link";
-
 const CartClient = () => {
   const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
   const [mobile, setMobile] = useState<boolean | null>(null);
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
   useEffect(() => {
     autoResize();
@@ -43,7 +42,7 @@ const CartClient = () => {
 
   return (
     <Container>
-      <Heading title="Shopping Cart" center borderBottom/>
+      <Heading title="Shopping Cart" center borderBottom />
       <div className="hidden md:grid grid-cols-5 gap-2 items-center mb-2 text-sm md:text-lg border-b border-b-light-primary">
         <p className="col-span-2 justify-self-start">PRODUCT</p>
         <p className="justify-self-center">PRICE</p>
@@ -104,7 +103,13 @@ const CartClient = () => {
             Tax and Shipping calculated on Checkout
           </p>
           <Link href="/checkout" className="w-full">
-          <Button buttonText="Checkout" onClick={() => {}} outline={2} full />
+            <Button
+              buttonText={isRedirecting ? "Redirecting.." : "Checkout"}
+              onClick={() => {}}
+              outline={2}
+              full
+              disabled={isRedirecting ? true : false}
+            />
           </Link>
         </div>
       </div>
