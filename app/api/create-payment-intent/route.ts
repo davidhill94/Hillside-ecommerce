@@ -1,13 +1,15 @@
-import Stripe from "stripe";
+import { CartProductType } from "@/app/product/[productId]/productDetails";
 import prisma from "@/libs/prismadb";
 import { NextResponse } from "next/server";
-import { CartProductType } from "@/app/product/[productId]/productDetails";
+import Stripe from "stripe";
 import { getCurrentUser } from "@/actions/getCurrentUser";
+import toast from "react-hot-toast";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2022-11-15",
 });
 
+//Calculate order total
 const calculateOrderAmount = (items: CartProductType[]) => {
   const totalPrice = items.reduce((acc, item) => {
     const itemTotal = item.price * item.quantity;
@@ -19,75 +21,71 @@ const calculateOrderAmount = (items: CartProductType[]) => {
   return price;
 };
 
-export async function POST(request: Request) {
+export async function POST(req, res) {
+  const data = await req.json();
   const currentUser = await getCurrentUser();
+  const total = calculateOrderAmount(data.submitData) * 100;
 
+  //IF NO USER IS LOGGED IN THEN RETURN ERROR
   if (!currentUser) {
     return NextResponse.error();
-  }
+  } 
 
-  const body = await request.json();
-  const { items, payment_intent_id } = body;
-  const total = calculateOrderAmount(items) * 100;
-  const orderData = {
-    user: { connect: { id: currentUser.id } },
-    amount: total,
-    currency: "gbp",
-    status: "pending",
-    deliveryStatus: "pending",
-    paymentIntentId: payment_intent_id,
-    products: items,
-  };
-
-  if (payment_intent_id) {
+  //If data.payment_intent_id exists:
+  //1. check to see where it exists - database done
+  //2. Update where it exists - database done
+  //3. Otherwise create new paymentIntent
+  if (data.payment_intent_id) {
+    //Finding and updating order in stripe payments
     const current_intent = await stripe.paymentIntents.retrieve(
-      payment_intent_id
+      data.payment_intent_id
     );
 
     if (current_intent) {
       const updated_intent = await stripe.paymentIntents.update(
-        payment_intent_id,
+        data.payment_intent_id,
         { amount: total }
       );
-
-      // update the order
-      const [existing_order, update_order] = await Promise.all([
-        prisma.order.findFirst({
-          where: { paymentIntentId: payment_intent_id },
-        }),
-        prisma.order.update({
-          where: { paymentIntentId: payment_intent_id },
-          data: {
-            amount: total,
-            products: items,
-          },
-        }),
-      ]);
-
-      if (!existing_order) {
-        return NextResponse.error();
-      }
-
-      return NextResponse.json({ paymentIntent: updated_intent });
     }
+
+    //Finding and updating order in database
+    const updateOrder = await Promise.all([
+      prisma.order.findFirst({
+        where: { paymentIntentId: data.payment_intent_id },
+      }),
+      prisma.order.update({
+        where: { paymentIntentId: data.payment_intent_id },
+        data: {
+          amount: total / 100,
+          products: data.submitData,
+        },
+      }),
+    ]);
+
+    return NextResponse.json({ data, updateOrder });
+    
   } else {
-    // create the intent
+    //CREATES PAYMENT INTENT IN STRIPE
     const paymentIntent = await stripe.paymentIntents.create({
       amount: total,
       currency: "gbp",
       automatic_payment_methods: { enabled: true },
     });
 
-    // create the order
-    orderData.paymentIntentId = paymentIntent.id;
-
+    //HANDLES ADDING ORDER TO DATABASE
     await prisma.order.create({
-      data: orderData,
+      data: {
+        user: { connect: { id: currentUser.id } },
+        amount: total / 100,
+        currency: "gbp",
+        status: "pending",
+        deliveryStatus: "pending",
+        paymentIntentId: paymentIntent.id,
+        products: data.submitData,
+      },
     });
 
-    return NextResponse.json({ paymentIntent });
+    return NextResponse.json({ data, paymentIntent });
   }
-
-   // Return a default response (e.g., an error response) if none of the conditions are met
-   return NextResponse.error();
 }
+

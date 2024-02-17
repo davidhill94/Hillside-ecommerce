@@ -9,10 +9,14 @@ import { formatPrice } from "../utils/formatPrice";
 import CartItem from "./cartItem";
 import CartItemMobile from "./cartItemMobile";
 import Link from "next/link";
+import { CartProductType } from "../product/[productId]/productDetails";
+import { loadStripe } from "@stripe/stripe-js";
+
 const CartClient = () => {
   const { cartProducts, handleClearCart, cartTotalAmount } = useCart();
   const [mobile, setMobile] = useState<boolean | null>(null);
   const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
+
 
   useEffect(() => {
     autoResize();
@@ -39,6 +43,20 @@ const CartClient = () => {
       </div>
     );
   }
+
+  //Calculate order total
+  const calculateOrderAmount = (items: CartProductType[]) => {
+    const totalPrice = items.reduce((acc, item) => {
+      const itemTotal = item.price * item.quantity;
+      return acc + itemTotal;
+    }, 0);
+
+    const price: any = totalPrice.toFixed(2);
+
+    return price;
+  };
+
+  calculateOrderAmount(cartProducts);
 
   return (
     <Container>
