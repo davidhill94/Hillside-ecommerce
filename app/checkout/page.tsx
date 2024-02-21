@@ -1,13 +1,15 @@
-"use client";
-
-import { useState } from "react";
+import { getCurrentUser } from "@/actions/getCurrentUser";
 import CheckoutClient from "./checkoutClient";
+import { SafeUser } from "@/types";
 
-const Checkout = () => {
+const Checkout = async () => {
+
+  const currentUser:any = await getCurrentUser();
+  console.log("USER", currentUser)
 
   return (
     <div>
-      <CheckoutClient />
+      <CheckoutClient currentUser={currentUser} />
     </div>
   );
 };

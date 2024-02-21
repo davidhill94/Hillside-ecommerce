@@ -8,11 +8,18 @@ import { useRouter } from "next/navigation";
 import { Button } from "../components/buttons/buttons";
 import { useCart } from "../hooks/useCart";
 import toast from "react-hot-toast";
+import { SafeUser } from "@/types";
+import { divider } from "@nextui-org/react";
 
-const CheckoutClient = () => {
+interface CheckoutClientProps {
+  currentUser: SafeUser | null;
+}
+
+const CheckoutClient: React.FC<CheckoutClientProps> = ({ currentUser }) => {
   const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false);
   const [paymentIntent, setPaymentIntent] = useState<string | null>(null);
   const [error, setError] = useState<boolean | null>(false);
+  const [redirecting, setRedirecting] = useState<boolean | null>(false);
   const [loading, setLoading] = useState<boolean | null>(true);
   const [clientSecret, setClientSecret] = useState<any>(null);
 
@@ -22,45 +29,53 @@ const CheckoutClient = () => {
   //handling checkout submit button
   const handleSubmit = async () => {
     setError(false);
+    setRedirecting(false);
     const submitData = cartProducts;
     const payment_intent_id = paymentIntent;
 
-    try {
-      const res = await fetch(`/api/create-payment-intent`, {
-        method: "POST",
-        body: JSON.stringify({ submitData, payment_intent_id }),
-        headers: {
-          "content-type": "application/json",
-        },
-      });
-      const data = await res.json();
-      setClientSecret(data.paymentIntent.client_secret);
-      //If payment intent state is not already existing then setPaymentIntent to new payment intent id
-      if (!paymentIntent) {
-        setPaymentIntent(data.paymentIntent.id);
-      }
-      //Checks to see paymentIntent is already in local storage, if not it sets local storage to paymentIntent Id
-      const hillsidePaymentIntent: any = localStorage.getItem(
-        "hillsidePaymentIntent"
-      );
-      const parsedPaymentIntent: string | null = JSON.parse(
-        hillsidePaymentIntent
-      );
-      if (!parsedPaymentIntent) {
-        localStorage.setItem(
-          "hillsidePaymentIntent",
-          JSON.stringify(data.paymentIntent.id)
+    if (!currentUser) {
+      toast.error("Please Log in to continue with checkout");
+      setLoading(false);
+      setRedirecting(true);
+      router.push("/login")
+    } else {
+      try {
+        const res = await fetch(`/api/create-payment-intent`, {
+          method: "POST",
+          body: JSON.stringify({ submitData, payment_intent_id }),
+          headers: {
+            "content-type": "application/json",
+          },
+        });
+        const data = await res.json();
+        setClientSecret(data.paymentIntent.client_secret);
+        //If payment intent state is not already existing then setPaymentIntent to new payment intent id
+        if (!paymentIntent) {
+          setPaymentIntent(data.paymentIntent.id);
+        }
+        //Checks to see paymentIntent is already in local storage, if not it sets local storage to paymentIntent Id
+        const hillsidePaymentIntent: any = localStorage.getItem(
+          "hillsidePaymentIntent"
         );
-      } else {
-        console.log("Payment Intent is already logged in LocalStorage");
+        const parsedPaymentIntent: string | null = JSON.parse(
+          hillsidePaymentIntent
+        );
+        if (!parsedPaymentIntent) {
+          localStorage.setItem(
+            "hillsidePaymentIntent",
+            JSON.stringify(data.paymentIntent.id)
+          );
+        } else {
+          console.log("Payment Intent is already logged in LocalStorage");
+        }
+      } catch (err) {
+        setError(true);
+        toast.error("Error occurred");
+        router.push("/cart");
+        console.log("err", err);
       }
-    } catch (err) {
-      setError(true);
-      toast.error("Error occurred");
-      router.push("/cart");
-      console.log("err", err);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -90,6 +105,18 @@ const CheckoutClient = () => {
   return (
     <div className="w-full min-h-screen bg-primaryColor flex items-center justify-center py-20">
       {loading && <div>Loading...</div>}
+      {redirecting && <div>Redirecting...</div>}
+      {error && (
+        <div className="flex flex-col gap-2">
+          <h3 className="text-2xl">Oops..an error has occurred!</h3>
+          <Button
+            buttonText="Return to Cart"
+            onClick={() => router.push("/cart")}
+            outline={1}
+            full
+          />
+        </div>
+      )}
       {clientSecret && (
         <div>
           {paymentSuccess ? (
@@ -111,11 +138,6 @@ const CheckoutClient = () => {
                 setPaymentIntent={setPaymentIntent}
               />
             </Elements>
-          )}
-          {error && (
-            <div className="text-center z-50 bg-secondaryColor absolute top-0 left-0 flex items-center justify-center">
-              Something went wrong...
-            </div>
           )}
         </div>
       )}
